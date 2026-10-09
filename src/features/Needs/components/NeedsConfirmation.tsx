@@ -11,7 +11,6 @@ export const NeedsConfirmation = () => {
   const onConfirm = () => {
     stepperActions.setStep({
       current: 1,
-      percent: 0,
     });
     needsActions.complete();
   };
@@ -19,7 +18,6 @@ export const NeedsConfirmation = () => {
   const onPrevStep = () => {
     stepperActions.setStep({
       current: 0,
-      percent: 90,
     });
     needsActions.onPrevState({
       step: NeedsStatusEnum.connectivityMatrix,

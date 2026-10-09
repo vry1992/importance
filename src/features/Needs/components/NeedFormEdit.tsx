@@ -33,7 +33,6 @@ export const NeedFormEdit = () => {
     needsActions.createMany(values.needs);
     stepperActions.setStep({
       current: 0,
-      percent: 50,
     });
   };
 

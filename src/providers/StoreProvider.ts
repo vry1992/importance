@@ -26,6 +26,18 @@ export const tables = {
     name: 'VECTOR_OF_INFLUENCE',
     keyPath: 'indexDbId',
   },
+  AUMatrix: {
+    name: 'AU_MATRIX',
+    keyPath: 'indexDbId',
+  },
+  UAUMatrix: {
+    name: 'UAU_MATRIX',
+    keyPath: 'indexDbId',
+  },
+  WUAUMatrix: {
+    name: 'WUAU_MATRIX',
+    keyPath: 'indexDbId',
+  },
   stepper: {
     name: 'STEPPER',
     keyPath: 'indexDbId',

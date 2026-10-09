@@ -1,4 +1,4 @@
-import type { MatrixRow } from '../../services/matrix';
+import type { MatrixRowItem } from '../../services/matrix';
 
 export type TNeed = {
   id: string;
@@ -12,18 +12,9 @@ export enum NeedsStatusEnum {
   completed,
 }
 
-export type TConnectivityMatrixRow = Array<
-  MatrixRow & {
-    need: TNeed;
-    dependency: TNeed;
-  }
->;
-
-export type TConnectivityMatrix = Record<string, TConnectivityMatrixRow>;
-
 export type TNeedsSlice = {
   needs: TNeed[];
   step: NeedsStatusEnum;
-  connectivityMatrix: TConnectivityMatrix | null;
+  connectivityMatrix: MatrixRowItem[][] | null;
   indexDbId: string;
 };

@@ -1,8 +1,10 @@
 export const VECTOR_OF_INFLUENCE_MOCK = {
   vectorsOfInfluences: {
-    'fe724f0d-f8c6-46d8-83af-f9da60008a4c': 0.417,
-    '641814e3-0357-4312-9518-ed8ab4072da7': 0.271,
-    '01f73a6d-759b-4006-8826-e7325b3bc26a': 0.312,
+    'ed1beeda-d25b-47e3-a0d6-d5c3e40a4282': 0.2,
+    '50d53920-1683-44cf-9c3f-90d71c3721bc': 0.2,
+    '06db4587-9bc6-42bc-9a9f-b226cda4c598': 0.2,
+    '928b2272-9528-43e4-ad46-5082d6fc64cc': 0.2,
+    'c831c7ce-d74e-4f6f-b86f-ea7fd3ab1d36': 0.2,
   },
   step: 1,
   indexDbId: '63b97aae-db14-4f25-805c-c125da6195e0',

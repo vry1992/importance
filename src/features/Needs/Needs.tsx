@@ -28,7 +28,7 @@ export const Needs = () => {
     },
     {
       key: '2',
-      label: 'Перевірка введених даних',
+      label: 'Перевірка введених даних (Матриця звʼязаності "Λ")',
       children: <NeedsReviewContainer />,
     },
   ];

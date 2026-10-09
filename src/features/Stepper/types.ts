@@ -5,6 +5,5 @@ export type TStep = {
 export type TStepperSlice = {
   steps: TStep[];
   current: number;
-  percent: number;
   indexDbId: string;
 };

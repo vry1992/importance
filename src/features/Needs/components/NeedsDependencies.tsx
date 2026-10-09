@@ -14,7 +14,6 @@ export const NeedsDependencies = () => {
   const onPrevStep = () => {
     stepperActions.setStep({
       current: 0,
-      percent: 0,
     });
     needsActions.onPrevState({
       step: NeedsStatusEnum.creating,

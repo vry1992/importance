@@ -1,7 +1,6 @@
 import { Abilities } from '../features/Abilities/Abilities';
 import { Counting } from '../features/Counting/Counting';
 import { Needs } from '../features/Needs/Needs';
-import { NeutralizationMatrixContainer } from '../features/NeutralizationMatrix/containers/NeutralizationMatrixContainer';
 import { useStepsSelectors } from '../features/Stepper/Stepper.slice';
 import { VectorOfInfluence } from '../features/VectorOfInfluence/VectorOfInfluence';
 import { Stepper } from '../ui/components/Stepper/Stepper';
@@ -15,9 +14,9 @@ export const Home = () => {
 
   const showVectorOfInfluence = stepper.current === 2;
 
-  const showNeutralizationMatrix = stepper.current === 3;
+  const showCounts = stepper.current === 3;
 
-  const showCounts = stepper.current === 4;
+  // const showCounts = stepper.current === 4;
 
   return (
     <div>
@@ -26,7 +25,7 @@ export const Home = () => {
       {showNeeds && <Needs />}
       {showAbilities && <Abilities />}
       {showVectorOfInfluence && <VectorOfInfluence />}
-      {showNeutralizationMatrix && <NeutralizationMatrixContainer />}
+      {/* {showNeutralizationMatrix && <NeutralizationMatrixContainer />} */}
       {showCounts && <Counting />}
     </div>
   );

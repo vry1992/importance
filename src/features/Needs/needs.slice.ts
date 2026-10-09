@@ -1,11 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { MatrixRowItem } from '../../services/matrix';
 import { useActionCreators, useAppSelector } from '../../store/hooks';
-import {
-  NeedsStatusEnum,
-  type TConnectivityMatrix,
-  type TNeed,
-  type TNeedsSlice,
-} from './types';
+import { NeedsStatusEnum, type TNeed, type TNeedsSlice } from './types';
 
 const initialState: TNeedsSlice = {
   needs: [],
@@ -51,7 +47,7 @@ export const needsSlice = createSlice({
     },
     createConnectivityMatrix: (
       state,
-      action: PayloadAction<TConnectivityMatrix>
+      action: PayloadAction<MatrixRowItem[][]>
     ) => {
       state.connectivityMatrix = action.payload;
       state.step = NeedsStatusEnum.review;

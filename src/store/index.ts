@@ -3,7 +3,10 @@ import {
   createListenerMiddleware,
   isAnyOf,
 } from '@reduxjs/toolkit';
-import { AUMatrixReducer } from '../features/AUMatrix/AUMatrix.slice';
+import {
+  AUMatrixActions,
+  AUMatrixReducer,
+} from '../features/AUMatrix/AUMatrix.slice';
 import {
   abilitiesActions,
   abilitiesReducer,
@@ -15,9 +18,17 @@ import {
   stepperReducer,
 } from '../features/Stepper/Stepper.slice';
 import {
+  UAUMatrixActions,
+  UAUMatrixReducer,
+} from '../features/UAUMatrix/UAUMatrix.slice';
+import {
   vectorOfInfluenceActions,
   vectorOfInfluenceReducer,
 } from '../features/VectorOfInfluence/vectorOfInfluence.slice';
+import {
+  WUAUMatrixActions,
+  WUAUMatrixReducer,
+} from '../features/WUAUMatrix/WUAUMatrix.slice';
 import { tables } from '../providers/StoreProvider';
 import { put } from '../services/db';
 
@@ -47,7 +58,8 @@ listenerMiddleware.startListening({
   matcher: isAnyOf(
     abilitiesActions.createMany,
     abilitiesActions.createImportance,
-    abilitiesActions.complete
+    abilitiesActions.complete,
+    abilitiesActions.createFunctionalityMatrix
   ),
   effect: async (_, listenerApi) => {
     const state = listenerApi.getState() as RootState;
@@ -63,6 +75,30 @@ listenerMiddleware.startListening({
   },
 });
 
+listenerMiddleware.startListening({
+  matcher: isAnyOf(AUMatrixActions.create),
+  effect: async (_, listenerApi) => {
+    const state = listenerApi.getState() as RootState;
+    put(tables.AUMatrix.name, state.AUMatrix);
+  },
+});
+
+listenerMiddleware.startListening({
+  matcher: isAnyOf(UAUMatrixActions.create),
+  effect: async (_, listenerApi) => {
+    const state = listenerApi.getState() as RootState;
+    put(tables.UAUMatrix.name, state.UAUMatrix);
+  },
+});
+
+listenerMiddleware.startListening({
+  matcher: isAnyOf(WUAUMatrixActions.create),
+  effect: async (_, listenerApi) => {
+    const state = listenerApi.getState() as RootState;
+    put(tables.WUAUMatrix.name, state.WUAUMatrix);
+  },
+});
+
 export const store = configureStore({
   reducer: {
     needs: needsReducer,
@@ -71,10 +107,14 @@ export const store = configureStore({
     vectorOfInfluence: vectorOfInfluenceReducer,
     neutralizationMatrix: neutralizationMatrixReducer,
     AUMatrix: AUMatrixReducer,
+    UAUMatrix: UAUMatrixReducer,
+    WUAUMatrix: WUAUMatrixReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(listenerMiddleware.middleware),
 });
+
+window.getState = store.getState;
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

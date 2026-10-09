@@ -27,7 +27,6 @@ export const NeedFormCreate = () => {
     );
     stepperActions.setStep({
       current: 0,
-      percent: 50,
     });
   };
 

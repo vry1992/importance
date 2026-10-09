@@ -32,7 +32,6 @@ export const AbilitiesForm = () => {
     );
     stepperActions.setStep({
       current: 1,
-      percent: 50,
     });
   };
 

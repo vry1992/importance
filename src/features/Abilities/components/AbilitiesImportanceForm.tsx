@@ -35,7 +35,6 @@ export const AbilitiesImportanceForm: React.FC = () => {
 
     stepperActions.setStep({
       current: 1,
-      percent: 90,
     });
   };
 

@@ -44,7 +44,6 @@ export const VectorOfInfluenceCreateForm: FC<{
           vectorOfInfluenceActions.create(values);
           stepperActions.setStep({
             current: 3,
-            percent: 100,
           });
         }}>
         <Listy<Item>

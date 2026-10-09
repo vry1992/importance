@@ -6,7 +6,6 @@ import type { TStepperSlice } from './types';
 const initialState: TStepperSlice = {
   steps: DEFAULT_STEPS_CONFIG,
   current: 0,
-  percent: 0,
   indexDbId: 'aa79f7bd-f2b0-4c40-9134-f222e0f284c0',
 };
 
@@ -16,18 +15,13 @@ export const stepperSlice = createSlice({
   reducers: {
     restore: (
       state,
-      { payload: { steps, current, percent } }: PayloadAction<TStepperSlice>
+      { payload: { steps, current } }: PayloadAction<TStepperSlice>
     ) => {
       state.steps = steps;
       state.current = current;
-      state.percent = percent;
     },
-    setStep: (
-      state,
-      { payload }: PayloadAction<{ current: number; percent: number }>
-    ) => {
+    setStep: (state, { payload }: PayloadAction<{ current: number }>) => {
       state.current = payload.current;
-      state.percent = payload.percent;
     },
   },
 });

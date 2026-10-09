@@ -1,4 +1,4 @@
-import type { MatrixRow } from '../../services/matrix';
+import type { MatrixRowItem } from '../../services/matrix';
 
 export type TAbility = {
   id: string;
@@ -13,7 +13,7 @@ export enum AbilityStatusEnum {
 }
 
 export type TAbilitiesSlice = {
-  functionalityMatrix: MatrixRow[] | [];
+  functionalityMatrix: MatrixRowItem[][] | [];
   abilities: TAbility[];
   step: AbilityStatusEnum;
   importance: Record<string, Record<string, number>> | null;

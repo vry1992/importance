@@ -2,15 +2,8 @@ import { Steps } from 'antd';
 import { useStepsSelectors } from '../../../features/Stepper/Stepper.slice';
 
 export const Stepper = () => {
-  const { steps, current, percent } = useStepsSelectors();
+  const { steps, current } = useStepsSelectors();
   return (
-    <Steps
-      // orientation="vertical"
-      current={current}
-      percent={percent}
-      titlePlacement="vertical"
-      items={steps}
-      ellipsis
-    />
+    <Steps current={current} titlePlacement="vertical" items={steps} ellipsis />
   );
 };

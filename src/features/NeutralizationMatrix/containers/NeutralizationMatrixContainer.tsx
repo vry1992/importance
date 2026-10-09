@@ -8,13 +8,11 @@ export const NeutralizationMatrixContainer = () => {
   const onPrevStep = () => {
     stepperActions.setStep({
       current: 2,
-      percent: 100,
     });
   };
   const onConfirm = () => {
     stepperActions.setStep({
       current: 4,
-      percent: 0,
     });
   };
 

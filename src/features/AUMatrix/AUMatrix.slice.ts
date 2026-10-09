@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { MatrixRow } from '../../services/matrix';
+import type { MatrixRowItem } from '../../services/matrix';
 import { useActionCreators, useAppSelector } from '../../store/hooks';
 import type { TAUMatrix } from './types';
 
@@ -15,7 +15,7 @@ export const AUMatrixSlice = createSlice({
     restore: (state, { payload: { matrix } }: PayloadAction<TAUMatrix>) => {
       state.matrix = matrix;
     },
-    create: (state, { payload }: PayloadAction<MatrixRow[]>) => {
+    create: (state, { payload }: PayloadAction<MatrixRowItem[][]>) => {
       state.matrix = payload;
     },
   },

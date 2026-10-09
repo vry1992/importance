@@ -12,7 +12,6 @@ export const AbilitiesImportanceContainer = () => {
   const onPrevStep = () => {
     stepperActions.setStep({
       current: 1,
-      percent: 0,
     });
     abilitiesActions.onPrevState({
       step: AbilityStatusEnum.creating,

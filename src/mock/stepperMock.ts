@@ -13,7 +13,6 @@ export const STEPPER_MOCK = {
       title: 'Підрахунки',
     },
   ],
-  current: 4,
-  percent: 0,
+  current: 3,
   indexDbId: 'aa79f7bd-f2b0-4c40-9134-f222e0f284c0',
 };

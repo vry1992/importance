@@ -11,20 +11,17 @@ import {
   type CheckboxOptionType,
 } from 'antd';
 import React from 'react';
+import type { MatrixRowItem } from '../../../services/matrix';
 import { useStepperActionCreators } from '../../Stepper/Stepper.slice';
 import { useNeedsActionCreators, useNeedsSelectors } from '../needs.slice';
-import type {
-  TConnectivityMatrix,
-  TConnectivityMatrixRow,
-  TNeed,
-} from '../types';
+import type { TNeed } from '../types';
 import { buildNeedsDependencies } from '../utils';
 
 const NEEDS_DEPENDENCY_CONFIG: CheckboxOptionType<any>[] = [
-  { value: 0, label: 'Відсутній' },
-  { value: 0.2, label: 'Слабкий' },
-  { value: 0.3, label: 'Середній' },
-  { value: 0.5, label: 'Сильний' },
+  { value: 0, label: 'Відсутній (0)' },
+  { value: 0.2, label: 'Слабкий (0.2)' },
+  { value: 0.3, label: 'Середній (0.3)' },
+  { value: 0.5, label: 'Сильний (0.5)' },
   { value: 1, label: '', style: { visibility: 'hidden' } },
 ];
 type TForm = Record<string, Record<string, number>>;
@@ -42,37 +39,36 @@ export const NeedsDependenciesForm: React.FC = () => {
   }, {});
 
   const onFinish = (values: TForm) => {
-    console.log('values => ', values);
-    const normalizedValues: TConnectivityMatrix = Object.entries(values).reduce(
+    const normalizedValues: MatrixRowItem[][] = Object.entries(values).reduce(
       (valuesAcc, [needId, needDependencies]) => {
-        const dependencies = Object.entries(needDependencies).reduce(
-          (depsAcc, [dependencyId, value]): TConnectivityMatrixRow => {
-            depsAcc.push({
-              value,
+        const dependencies: MatrixRowItem[] = Object.entries(
+          needDependencies
+        ).reduce((depsAcc, [dependencyId, value]): MatrixRowItem[] => {
+          const matrixRowItem: MatrixRowItem = {
+            value,
+            rowId: needId,
+            colId: dependencyId,
+            data: {
               need: needsAsObj[needId],
               dependency: needsAsObj[dependencyId],
-              rowId: needId,
-              colId: dependencyId,
-            });
+            },
+          };
 
-            return depsAcc;
-          },
-          []
-        );
+          depsAcc.push(matrixRowItem);
 
-        valuesAcc[needId] = dependencies;
+          return depsAcc;
+        }, []);
+
+        valuesAcc.push(dependencies);
         return valuesAcc;
       },
-      {}
+      []
     );
-
-    console.log('normalized => ', normalizedValues);
 
     needsActions.createConnectivityMatrix(normalizedValues);
 
     stepperActions.setStep({
       current: 0,
-      percent: 90,
     });
   };
 
@@ -93,13 +89,24 @@ export const NeedsDependenciesForm: React.FC = () => {
                   {deps.map((dep) => {
                     return (
                       <Flex
-                        align="center"
+                        vertical
+                        align="left"
                         style={{
                           marginBottom: '10px',
                           display: dep.id !== main.id ? 'flex' : 'none',
                           boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
                         }}
                         key={`${main.id}_${dep.id}`}>
+                        <Typography.Text
+                          style={{
+                            marginRight: '20px',
+                            borderBottomWidth: 1,
+                            borderBottomColor: '#00000030',
+                            borderBottomStyle: 'solid',
+                            paddingBottom: 10,
+                          }}>
+                          {dep.name}
+                        </Typography.Text>
                         <Form.Item
                           name={[main.id, dep.id]}
                           style={{
@@ -109,16 +116,6 @@ export const NeedsDependenciesForm: React.FC = () => {
                           <Radio.Group
                             options={NEEDS_DEPENDENCY_CONFIG}></Radio.Group>
                         </Form.Item>
-                        <Typography.Text
-                          style={{
-                            marginRight: '20px',
-                            borderLeftWidth: 1,
-                            borderLeftColor: 'black',
-                            borderLeftStyle: 'solid',
-                            paddingLeft: 10,
-                          }}>
-                          {dep.name}
-                        </Typography.Text>
                       </Flex>
                     );
                   })}

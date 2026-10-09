@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { MatrixRowItem } from '../../services/matrix';
 import { useActionCreators, useAppSelector } from '../../store/hooks';
 import {
   AbilityStatusEnum,
@@ -22,6 +23,7 @@ export const abilitiesSlice = createSlice({
       state.abilities = payload.abilities;
       state.importance = payload.importance;
       state.step = payload.step;
+      state.functionalityMatrix = payload.functionalityMatrix;
     },
     add: (state, action: { type: string; payload: TAbility }) => {
       const currentNeeds = state.abilities;
@@ -41,6 +43,12 @@ export const abilitiesSlice = createSlice({
     },
     complete: (state) => {
       state.step = AbilityStatusEnum.completed;
+    },
+    createFunctionalityMatrix: (
+      state,
+      action: PayloadAction<MatrixRowItem[][]>
+    ) => {
+      state.functionalityMatrix = action.payload;
     },
     onPrevState: (
       state,

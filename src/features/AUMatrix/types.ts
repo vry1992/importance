@@ -1,6 +1,6 @@
-import type { MatrixRow } from '../../services/matrix';
+import type { MatrixRowItem } from '../../services/matrix';
 
 export type TAUMatrix = {
-  matrix: MatrixRow[];
+  matrix: MatrixRowItem[][];
   indexDbId: string;
 };

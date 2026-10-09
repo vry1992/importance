@@ -12,7 +12,6 @@ export const NeedsReviewContainer = () => {
   const onPrevStep = () => {
     stepperActions.setStep({
       current: 0,
-      percent: 50,
     });
     needsActions.onPrevState({
       step: NeedsStatusEnum.connectivityMatrix,
@@ -21,7 +20,6 @@ export const NeedsReviewContainer = () => {
   const onConfirm = () => {
     stepperActions.setStep({
       current: 1,
-      percent: 0,
     });
     needsActions.complete();
   };
